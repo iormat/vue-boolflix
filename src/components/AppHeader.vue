@@ -3,16 +3,39 @@
 		<h1> BoolFlix </h1>
 		<div>
 			<label for="input-search">
-				<input id="input-search" type="text">
+				<input id="input-search" type="text" v-model.trim="userInput" @keyup.enter="saveUserSearch">
 			</label>
-			<button> Search </button>
+			<button @click.prevent="saveUserSearch"> Search </button>
 		</div>
 	</header>
 </template>
 
 <script>
-export default {
-  name: 'AppHeader',
+import axios from "axios";
+export default {	
+	name: 'AppHeader',
+	data () {
+		return {
+			filmsArr: [],
+			userInput: "",
+			userResearch: "",
+		}
+	},
+	methods: {
+		saveUserSearch() {
+			this.userResearch = this.userInput;
+			this.userInput = "";
+			// start search
+			let apiObj = "https://api.themoviedb.org/3/search/movie?api_key=44637956b9084a5c4eb306d80e3f63ea&query=" + this.userResearch
+			axios
+			.get(apiObj)
+			.then((obj) => {
+				this.filmsArr = obj.data.results;
+				// // used to send genreArray info to parent(App)
+				this.$emit('correlatedFilms', this.filmsArr)
+			})
+		}
+	}
 }
 </script>
 

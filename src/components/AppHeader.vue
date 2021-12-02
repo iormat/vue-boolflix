@@ -3,9 +3,9 @@
 		<h1> BoolFlix </h1>
 		<div>
 			<label for="input-search">
-				<input id="input-search" type="text" v-model.trim="userInput" @keyup.enter="saveUserSearch">
+				<input id="input-search" type="text" v-model.trim="userInput" @keyup.enter="checkSeriesFilms">
 			</label>
-			<button @click.prevent="saveUserSearch"> Search </button>
+			<button @click.prevent="checkSeriesFilms"> Search </button>
 		</div>
 	</header>
 </template>
@@ -16,16 +16,16 @@ export default {
 	name: 'AppHeader',
 	data () {
 		return {
+			seriesArr: [],
 			filmsArr: [],
 			userInput: "",
 			userResearch: "",
 		}
 	},
 	methods: {
-		saveUserSearch() {
+		// start films search
+		saveUserSearchFilms() {
 			this.userResearch = this.userInput;
-			this.userInput = "";
-			// start search
 			let apiObj = "https://api.themoviedb.org/3/search/movie?api_key=44637956b9084a5c4eb306d80e3f63ea&query=" + this.userResearch
 			axios
 			.get(apiObj)
@@ -34,7 +34,27 @@ export default {
 				// // used to send films Array info to parent(App)
 				this.$emit('correlatedFilms', this.filmsArr)
 			})
+		},
+		// start series search
+		saveUserSearchSeries() {
+			this.userResearch = this.userInput;
+			this.userInput = "";
+			let apiObj = "https://api.themoviedb.org/3/search/tv?api_key=44637956b9084a5c4eb306d80e3f63ea&query=" + this.userResearch
+			axios
+			.get(apiObj)
+			.then((obj) => {
+				this.seriesArr = obj.data.results;
+				// // used to send series Array info to parent(App)
+				this.$emit('correlatedSeries', this.seriesArr)
+				console.log(this.seriesArr)
+			})
+		},
+		// use both function on click
+		checkSeriesFilms() {
+			this.saveUserSearchFilms();
+			this.saveUserSearchSeries();				
 		}
+
 	}
 }
 </script>

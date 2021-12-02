@@ -1,34 +1,48 @@
 <template>
 	<div id="app">
 		<AppHeader
-		@correlatedFilms="showFilms" 
+		@correlatedFilms="showFilms"
+		@correlatedSeries="showSeries" 
 		/>
-		<AppMain
-		:films="filmsArr"
-		/>
+		<main>
+			<MainFilmCards
+			:films="filmsArr"
+			/>
+
+			<MainSeriesCards
+			:series="seriesArr"
+			/>
+		</main>
 	</div>
 </template>
 
 <script>
 import AppHeader from './components/AppHeader.vue'
-import AppMain from './components/AppMain.vue'
+import MainFilmCards from './components/MainFilmCards.vue'
+import MainSeriesCards from './components/MainSeriesCards.vue'
 
 export default {
 	name: 'App',
 		components: {
 			AppHeader,
-			AppMain,
+			MainFilmCards,
+			MainSeriesCards,
 		},
 		data() {
 			return {
 				filmsArr:[],
+				seriesArr: [],
 			}
 		},
 		methods: {
-			// fill genres array with child info
+			// fill films array with child info
 			showFilms(allFilms) {
 				this.filmsArr = allFilms;
 				// console.log(allFilms)
+			},
+			// fill series array with child info
+			showSeries(allSeries) {
+				this.seriesArr = allSeries;
 			}
 		},
 	}
@@ -88,5 +102,11 @@ export default {
 		display: block;
 		color: var(--clr-neutral-100);
 	}
-
+	// MAIN RULES
+	main {
+        padding: 3em 5em;
+		background-color: var(--clr-neutral-500);
+        height: calc(100vh - 75px);
+        overflow-y: auto;
+	}
 </style>

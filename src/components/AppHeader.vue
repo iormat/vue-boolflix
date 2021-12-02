@@ -31,7 +31,7 @@ export default {
 			.get(apiObj)
 			.then((obj) => {
 				this.filmsArr = obj.data.results;
-				// // used to send genreArray info to parent(App)
+				// // used to send films Array info to parent(App)
 				this.$emit('correlatedFilms', this.filmsArr)
 			})
 		}

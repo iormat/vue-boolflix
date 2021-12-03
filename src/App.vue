@@ -115,7 +115,7 @@ export default {
 			display: inline-block;
 			vertical-align: text-top;
 			width: calc(100% / 4 - 1.5rem);
-			min-height: 40ch;
+			min-height: 45ch;
 			padding: .25em .5em;
 			margin: .75rem .75rem;
 			background-color: var(--clr-neutral-900);
@@ -123,11 +123,6 @@ export default {
 			overflow-y: auto;
 			&:hover .card_image {
 				display: none;
-			}
-			& a {
-				color: var(--clr-neutral-100);
-				text-decoration: none;
-				height: 100%;
 			}
 			& .card_image {
 				display: block;
@@ -139,6 +134,9 @@ export default {
 				right: 0;
 				bottom: 0;
 				z-index: 1;
+			}
+			& span img {
+				width: 15%;
 			}
 		}
 	}

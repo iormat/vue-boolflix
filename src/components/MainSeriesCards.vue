@@ -36,25 +36,33 @@ export default {
     components: {
         StarRating,
     },
-
     props: {
         series: Array,
     },
     methods: {
+        // add language relative flag on few languages
         checkFlag(serie) {
             if(serie.original_language === 'en') {
                 return require("../assets/en-flag.png")
             }else if(serie.original_language === 'it') {
                 return require("../assets/it-flag.png")
+            }else if(serie.original_language === 'es') {
+                return require("../assets/es-flag.png")
+            }else if(serie.original_language === 'de') {
+                return require("../assets/de-flag.png")
+            }else if(serie.original_language === 'fr') {
+                return require("../assets/fr-flag.png")
             }
         },
+        // get image from Api
         checkImage(serie) {
             if(serie.poster_path === null) {
-                return "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.salonlfc.com%2Fwp-content%2Fuploads%2F2018%2F01%2Fimage-not-found-1-scaled-1150x647.png&f=1&nofb=1"
+                return require("../assets/no-available.png")
             }else {
                 return "https://image.tmdb.org/t/p/w342" + serie.poster_path;
             }
         },
+        // get rating from Api
         getRating(serie){
             this.rating = Math.round(parseFloat(serie.vote_average / 2))
         },

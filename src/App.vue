@@ -136,7 +136,8 @@ export default {
 				z-index: 1;
 			}
 			& span img {
-				width: 15%;
+				width: 30px;
+				border-radius: 50%;
 			}
 		}
 	}

@@ -25,31 +25,34 @@ export default {
 	methods: {
 		// start films search
 		saveUserSearchFilms() {
-			this.userResearch = this.userInput;
-			let apiObj = "https://api.themoviedb.org/3/search/movie?api_key=44637956b9084a5c4eb306d80e3f63ea&query=" + this.userResearch
-			axios
-			.get(apiObj)
-			.then((obj) => {
-				this.filmsArr = obj.data.results;
-				// // used to send films Array info to parent(App)
-				this.$emit('correlatedFilms', this.filmsArr)
-			})
+			if(this.userInput !== "" && this.userInput !== " ") {
+				this.userResearch = this.userInput;
+				let apiObj = "https://api.themoviedb.org/3/search/movie?api_key=44637956b9084a5c4eb306d80e3f63ea&query=" + this.userResearch
+				axios
+				.get(apiObj)
+				.then((obj) => {
+					this.filmsArr = obj.data.results;
+					// // used to send films Array info to parent(App)
+					this.$emit('correlatedFilms', this.filmsArr)
+				})
+			}
 		},
 		// start series search
 		saveUserSearchSeries() {
-			this.userResearch = this.userInput;
-			this.userInput = "";
-			let apiObj = "https://api.themoviedb.org/3/search/tv?api_key=44637956b9084a5c4eb306d80e3f63ea&query=" + this.userResearch
-			axios
-			.get(apiObj)
-			.then((obj) => {
-				this.seriesArr = obj.data.results;
-				// // used to send series Array info to parent(App)
-				this.$emit('correlatedSeries', this.seriesArr)
-				console.log(this.seriesArr)
-			})
+			if(this.userInput !== "" && this.userInput !== " ") {
+				this.userResearch = this.userInput;
+				this.userInput = "";
+				let apiObj = "https://api.themoviedb.org/3/search/tv?api_key=44637956b9084a5c4eb306d80e3f63ea&query=" + this.userResearch
+				axios
+				.get(apiObj)
+				.then((obj) => {
+					this.seriesArr = obj.data.results;
+					// // used to send series Array info to parent(App)
+					this.$emit('correlatedSeries', this.seriesArr)
+				})
+			}
 		},
-		// use both function on click
+		// use both function on click and on keyup.enter
 		checkSeriesFilms() {
 			this.saveUserSearchFilms();
 			this.saveUserSearchSeries();				

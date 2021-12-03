@@ -77,5 +77,4 @@ export default {
 	button {
 		background-color: var(--clr-txt-primary-500);
 	}
-
 </style>

@@ -49,6 +49,7 @@ export default {
 </script>
 
 <style lang="scss">
+// GENERAL INITIAL SETUP
 	:root {
 		--clr-neutral-100: #fff;
 		--clr-neutral-300: #858585;
@@ -71,6 +72,7 @@ export default {
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}
+// TEXT GENERAL DETAILS
 	h2 {
 		font-size: 1.2rem;
 		& span {
@@ -102,11 +104,43 @@ export default {
 		display: block;
 		color: var(--clr-neutral-100);
 	}
-	// MAIN RULES
+// MAIN RULES
 	main {
         padding: 3em 5em;
 		background-color: var(--clr-neutral-500);
         height: calc(100vh - 75px);
         overflow-y: auto;
+		// general cards style
+		.card {
+			display: inline-block;
+			vertical-align: text-top;
+			width: calc(100% / 4 - 1.5rem);
+			min-height: 40ch;
+			padding: .25em .5em;
+			margin: .75rem .75rem;
+			background-color: var(--clr-neutral-900);
+			position: relative;
+			overflow-y: auto;
+			&:hover .card_image {
+				display: none;
+			}
+			& a {
+				color: var(--clr-neutral-100);
+				text-decoration: none;
+				height: 100%;
+			}
+			& .card_image {
+				display: block;
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 1;
+			}
+		}
 	}
+
 </style>
